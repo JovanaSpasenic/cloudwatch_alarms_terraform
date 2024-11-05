@@ -23,12 +23,15 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: /cloudwatch_alarms_terraform/infra
 
       - name: Terraform Plan
         run: terraform plan
+        working-directory: /cloudwatch_alarms_terraform/infra
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: /cloudwatch_alarms_terraform/infra
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Legg til AWS Secrets i GitHub
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

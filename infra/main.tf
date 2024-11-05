@@ -21,8 +21,33 @@ resource "aws_cloudwatch_dashboard" "main" {
         "region": "eu-west-1",
         "title": "Total number of accounts"
       }
-    }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 6,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [
+            "${var.student_name}",
+            "bank_sum.value"
+          ]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "region": "eu-west-1",
+        "title": "Total bank balance"
+      }
+    }  
   ]
 }
 DASHBOARD
+}
+
+module "alarm" {
+  source = "./alarm_module"
+  alarm_email = "jovanajov1234@hotmail.com"
+  prefix = var.student_name 
 }
